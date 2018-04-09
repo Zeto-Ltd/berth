@@ -22,3 +22,9 @@ docker push zetoltd/circleci-cordova-android:1.0.0
 
 docker build -t zetoltd/circleci-website:1.0.0 ./images/website/
 docker push zetoltd/circleci-website:1.0.0
+
+# Lifted from doc.ai fork of original docker image from Sendgridlabs
+docker build -t zetoltd/loggly:1.0.0 ./images/loggly/
+docker build -t zetoltd/loggly:latest ./images/loggly/
+docker push zetoltd/loggly:1.0.0
+docker push zetoltd/loggly:latest
