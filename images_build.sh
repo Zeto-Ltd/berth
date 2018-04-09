@@ -28,3 +28,6 @@ docker build -t zetoltd/loggly:1.0.0 ./images/loggly/
 docker build -t zetoltd/loggly:latest ./images/loggly/
 docker push zetoltd/loggly:1.0.0
 docker push zetoltd/loggly:latest
+
+docker build -t zetoltd/circleci-frontend:1.0.0 ./images/frontend/
+docker push zetoltd/circleci-frontend:1.0.0
