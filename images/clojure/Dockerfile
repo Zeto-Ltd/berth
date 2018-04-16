@@ -21,3 +21,5 @@ RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID"
        stable" && \
     apt-get update && apt-get install -y --no-install-recommends \
     docker-ce
+
+COPY wait_tcp.sh /usr/bin/wait_tcp
