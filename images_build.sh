@@ -2,8 +2,8 @@
 
 docker login
 
-docker build -t zetoltd/circleci-clojure:1.0.1 ./images/clojure/
-docker push zetoltd/circleci-clojure:1.0.1
+docker build -t zetoltd/circleci-clojure:1.0.2 ./images/clojure/
+docker push zetoltd/circleci-clojure:1.0.2
 
 docker build -t zetoltd/circleci-python:1.0.1 ./images/python/
 docker push zetoltd/circleci-python:1.0.1
