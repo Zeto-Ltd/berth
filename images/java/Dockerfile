@@ -1,4 +1,4 @@
-FROM maven:3.5.3-jdk-8-slim
+FROM maven:3.5.3-jdk-8
 
 RUN apt-get update && apt-get install -y \
     apt-transport-https \
@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     gnupg2 \
     git \
+    netcat \
+    postgresql-client \
     software-properties-common \
     python-setuptools \
     python-pip
@@ -19,3 +21,5 @@ RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID"
        stable" && \
     apt-get update && apt-get install -y --no-install-recommends \
     docker-ce
+
+COPY wait_tcp.sh /usr/bin/wait_tcp
