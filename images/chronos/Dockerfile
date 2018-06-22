@@ -21,7 +21,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y curl git debhelper devscripts \
         build-essential libboost-program-options-dev libcurl4-openssl-dev libevent-dev \
         libboost-regex-dev libboost-filesystem-dev libtool automake make cmake \
-        libzmq3-dev libsnmp-dev
+        libzmq3-dev libsnmp-dev libc-ares2
 
 ENV CHRONOS_VERSION release-117
 ENV CHRONOS_REPO_DIR /chronos
@@ -36,7 +36,8 @@ RUN mkdir -p /usr/share/chronos/lib && \
     cp ${CHRONOS_REPO_DIR}/build/bin/chronos /usr/bin/chronos && \
     useradd --system -M -d /nonexistent -s /bin/false chronos && \
     mkdir -p /var/log/chronos && chown chronos /var/log/chronos && \
-    chmod 755 /etc/init.d/chronos
+    chmod 755 /etc/init.d/chronos && rm -rf ${CHRONOS_REPO_DIR}
 
+EXPOSE 7254
 COPY entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["bash", "/docker-entrypoint.sh"]
