@@ -40,3 +40,6 @@ docker push zetoltd/chronos:1.0.0
 
 docker build -t zetoltd/keycloak:1.0.0 ./images/keycloak/
 docker push zetoltd/keycloak:1.0.0
+
+docker build -t zetoltd/devbox:1.0.0 ./images/devbox/
+docker push zetoltd/devbox:1.0.0
