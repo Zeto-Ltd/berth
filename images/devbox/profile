@@ -16,8 +16,8 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin directories
-PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+# set PATH so it includes user's private bin directories and other custom bins
+PATH="$HOME/liquibase:$HOME/bin:$HOME/.local/bin:$PATH"
 
 # Defined as part of docker image run
 #EDITOR=emacs

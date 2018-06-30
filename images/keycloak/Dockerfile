@@ -9,6 +9,8 @@ ENV KEYCLOAK_VERSION 3.4.3.Final
 RUN curl -L https://downloads.jboss.org/keycloak/${KEYCLOAK_VERSION}/keycloak-${KEYCLOAK_VERSION}.tar.gz | tar zx && \
     mv /keycloak-${KEYCLOAK_VERSION} /keycloak
 
+# TODO: install Postgresql module for use as DB driver
+
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 EXPOSE 8080
 EXPOSE 7600
