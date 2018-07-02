@@ -126,7 +126,9 @@ export NVM_DIR="$HOME/.nvm"
 # pyenv
 export PATH="~/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenvwrapper -)"
+export WORKON_HOME=~/venv
+# source one of the virtualenvwrapper scripts to get workon command
+source ~/.pyenv/versions/3.6.5/bin/virtualenvwrapper.sh
 
 # enable tmux for all sessions
 if [[ -z "$TMUX" ]] ;then

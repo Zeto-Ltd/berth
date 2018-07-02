@@ -36,6 +36,7 @@ RUN apt update && apt install -y \
     emacs-nox \
     tmux \
     vim \
+    postgresql-client-10 \
     xvfb && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
     echo "deb http://download.mono-project.com/repo/debian wheezy/snapshots/${MONO_VERSION} main" > /etc/apt/sources.list.d/mono-xamarin.list && \
@@ -77,13 +78,13 @@ RUN git clone git://github.com/pyenv/pyenv.git ~/.pyenv && \
     $PYENV_BIN global 2.7.15 && $($PYENV_BIN which python) get-pip.py && \
     $($PYENV_BIN which pip) --no-cache-dir install \
     virtualenv==16.0.0 \
+    virtualenvwrapper==4.8.2 \
     awscli==1.15.49 && \
     $PYENV_BIN global 3.6.5 && $($PYENV_BIN which python) get-pip.py && \
     $($PYENV_BIN which pip) --no-cache-dir install \
     virtualenv==16.0.0 \
+    virtualenvwrapper==4.8.2 \
     awscli==1.15.49 && \
-    git clone https://github.com/pyenv/pyenv-virtualenvwrapper.git \
-        $($PYENV_BIN root)/plugins/pyenv-virtualenvwrapper && \
     rm get-pip.py
 
 # liquibase DB migration tool

@@ -8,8 +8,8 @@ RUN apk update && apk add curl py-pip && pip install awscli==1.11.51
 ENV KEYCLOAK_VERSION 3.4.3.Final
 RUN curl -L https://downloads.jboss.org/keycloak/${KEYCLOAK_VERSION}/keycloak-${KEYCLOAK_VERSION}.tar.gz | tar zx && \
     mv /keycloak-${KEYCLOAK_VERSION} /keycloak
-
-# TODO: install Postgresql module for use as DB driver
+ADD modules /keycloak/modules
+RUN wget https://jdbc.postgresql.org/download/postgresql-42.2.2.jar -O /keycloak/modules/org/postgresql/main/postgresql-jdbc.jar
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 EXPOSE 8080
