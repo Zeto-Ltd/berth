@@ -11,8 +11,8 @@ docker push zetoltd/circleci-python:1.0.1
 docker build -t zetoltd/circleci-python3:1.0.0 ./images/python3/
 docker push zetoltd/circleci-python3:1.0.0
 
-docker build -t zetoltd/circleci-dynamodblocal:1.0.1 ./images/dynamodb/
-docker push zetoltd/circleci-dynamodblocal:1.0.1
+docker build -t zetoltd/circleci-dynamodblocal:1.0.2 ./images/dynamodb/
+docker push zetoltd/circleci-dynamodblocal:1.0.2
 
 docker build -t zetoltd/circleci-postgres:1.0.0 ./images/postgres/
 docker push zetoltd/circleci-postgres:1.0.0
