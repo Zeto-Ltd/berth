@@ -1,7 +1,7 @@
-FROM openjdk:8-jre-alpine
+FROM openjdk:10.0-jre-slim
 
 EXPOSE 9091
-RUN apk update && apk add wget tar
+RUN apt update && apt install -y wget tar
 
 WORKDIR /dynamodb
 RUN wget -O /tmp/dynamodb_local_latest https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz && \
