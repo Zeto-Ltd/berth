@@ -50,6 +50,8 @@ RUN apt update && apt install -y \
 
 COPY bashrc ${DEV_HOME}/.bashrc
 COPY profile ${DEV_HOME}/.profile
+ARG USER_UID
+ARG USER_GID
 # adding user 'dev' that matches host gid/uid with password of 'dev'
 # + sane tmux configuration
 ENV TMUX_MODIFIER C-q
