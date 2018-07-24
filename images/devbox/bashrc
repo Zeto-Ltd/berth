@@ -141,3 +141,4 @@ if [[ -z "$TMUX" ]] ;then
 fi
 
 export LIQUIBASE_HOME=/home/dev/liquibase
+export LANG=C.UTF-8
