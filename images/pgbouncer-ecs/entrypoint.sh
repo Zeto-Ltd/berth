@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PG_RUN=/var/run/pgbouncer/
-PG_LOG=/var/log/pgbouncer/
+PG_LOG=/var/log/containers/pgbouncer/
 PG_CONFIG=/etc/pgbouncer/pgbouncer.ini
 PG_USER=postgres
 
