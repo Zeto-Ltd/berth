@@ -41,6 +41,9 @@ docker push zetoltd/circleci-frontend:1.0.0
 docker build -t zetoltd/nginx-elb:1.0.0 ./images/nginx-elb/
 docker push zetoltd/nginx-elb:1.0.0
 
+docker build -t zetoltd/pgbouncer-ecs:1.0.0 ./images/pgbouncer-ecs/
+docker push zetoltd/pgbouncer-ecs:1.0.0
+
 docker build -t zetoltd/chronos:1.0.0 ./images/chronos/
 docker push zetoltd/chronos:1.0.0
 
