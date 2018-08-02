@@ -48,22 +48,7 @@ RUN apt update && apt install -y \
     chmod 755 /usr/bin/nuget && \
     apt clean
 
-COPY bashrc ${DEV_HOME}/.bashrc
-COPY profile ${DEV_HOME}/.profile
-ARG USER_UID
-ARG USER_GID
-# adding user 'dev' that matches host gid/uid with password of 'dev'
-# + sane tmux configuration
-ENV TMUX_MODIFIER C-q
-RUN addgroup --gid ${USER_GID:-1000} dev && \
-    useradd -d ${DEV_HOME} -s /bin/bash \
-        -p sjFK4jJmFgl1M \
-        -u ${USER_UID:-1000} -g ${USER_GID:-1000} -G sudo dev && \
-    echo -e "unbind C-b\nset -g prefix ${TMUX_MODIFIER}\nbind ${TMUX_MODIFIER} send-prefix" > ${DEV_HOME}/.tmux.conf && \
-    chown -R dev:dev ${DEV_HOME}
-
 WORKDIR ${DEV_HOME}
-USER dev
 
 # install NVM for all node LTS versions
 ENV NVM_DIR=${DEV_HOME}/.nvm
@@ -74,17 +59,19 @@ RUN mkdir -p $NVM_DIR && \
     nvm alias default v8.11.3
 
 # install PyEnv for all python versions, defaulting to v3
-ENV PYENV_BIN ${DEV_HOME}/.pyenv/bin/pyenv
-RUN git clone git://github.com/pyenv/pyenv.git ~/.pyenv && \
-    $PYENV_BIN install 2.7.15 && $PYENV_BIN install 3.6.5 && \
+ENV PYENV_BIN=${DEV_HOME}/.pyenv/bin/pyenv \
+    PYENV_ROOT=${DEV_HOME}/.pyenv \
+    PATH="$PYENV_ROOT/bin:$PATH"
+RUN git clone git://github.com/pyenv/pyenv.git ${DEV_HOME}/.pyenv && \
+    ${PYENV_BIN} install 2.7.15 && ${PYENV_BIN} install 3.6.5 && \
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    $PYENV_BIN global 2.7.15 && $($PYENV_BIN which python) get-pip.py && \
-    $($PYENV_BIN which pip) --no-cache-dir install \
+    ${PYENV_BIN} global 2.7.15 && $(${PYENV_BIN} which python) get-pip.py && \
+    $(${PYENV_BIN} which pip) --no-cache-dir install \
     virtualenv==16.0.0 \
     virtualenvwrapper==4.8.2 \
     awscli==1.15.49 && \
-    $PYENV_BIN global 3.6.5 && $($PYENV_BIN which python) get-pip.py && \
-    $($PYENV_BIN which pip) --no-cache-dir install \
+    ${PYENV_BIN} global 3.6.5 && $(${PYENV_BIN} which python) get-pip.py && \
+    $(${PYENV_BIN} which pip) --no-cache-dir install \
     virtualenv==16.0.0 \
     virtualenvwrapper==4.8.2 \
     awscli==1.15.49 && \
@@ -101,6 +88,21 @@ RUN wget https://github.com/liquibase/liquibase/releases/download/liquibase-pare
     tar -xzf ${DEV_HOME}/slf4j-${SLF4J_VERSION}.tar.gz && \
     cp ${DEV_HOME}/slf4j-${SLF4J_VERSION}/slf4j-api-${SLF4J_VERSION}.jar ${DEV_HOME}/liquibase/lib/slf4j-api.jar && \
     rm -rf ${DEV_HOME}/slf4j-${SLF4J_VERSION}* ${DEV_HOME}/liquibase.tar.gz
+
+
+COPY bashrc ${DEV_HOME}/.bashrc
+COPY profile ${DEV_HOME}/.profile
+ARG USER_UID
+ARG USER_GID
+# adding user 'dev' that matches host gid/uid with password of 'dev'
+# + sane tmux configuration
+ENV TMUX_MODIFIER C-q
+RUN addgroup --gid ${USER_GID:-1000} dev && \
+    useradd -d ${DEV_HOME} -s /bin/bash \
+        -p sjFK4jJmFgl1M \
+        -u ${USER_UID:-1000} -g ${USER_GID:-1000} -G sudo dev && \
+    echo -e "unbind C-b\nset -g prefix ${TMUX_MODIFIER}\nbind ${TMUX_MODIFIER} send-prefix" > ${DEV_HOME}/.tmux.conf && \
+    chown -R dev:dev ${DEV_HOME}
 
 COPY entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/bin/bash", "/docker-entrypoint.sh"]
