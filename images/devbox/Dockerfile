@@ -42,11 +42,10 @@ RUN apt update && apt install -y \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
     echo "deb http://download.mono-project.com/repo/debian wheezy/snapshots/${MONO_VERSION} main" > /etc/apt/sources.list.d/mono-xamarin.list && \
     apt update && \
-    apt install -y mono-devel && \
+    apt install -y mono-devel nunit-console && \
     wget https://nuget.org/nuget.exe -O /usr/bin/nuget.exe && \
-    echo -e "#!/bin/bash\nmono /usr/bin/nuget.exe $*" > /usr/bin/nuget && \
-    chmod 755 /usr/bin/nuget && \
     apt clean
+ADD nuget.sh /usr/bin/nuget
 
 WORKDIR ${DEV_HOME}
 
@@ -92,17 +91,13 @@ RUN wget https://github.com/liquibase/liquibase/releases/download/liquibase-pare
 
 COPY bashrc ${DEV_HOME}/.bashrc
 COPY profile ${DEV_HOME}/.profile
-ARG USER_UID
-ARG USER_GID
-# adding user 'dev' that matches host gid/uid with password of 'dev'
-# + sane tmux configuration
+# adding user and group 'dev' + sane tmux configuration
 ENV TMUX_MODIFIER C-q
-RUN addgroup --gid ${USER_GID:-1000} dev && \
+RUN addgroup dev && \
     useradd -d ${DEV_HOME} -s /bin/bash \
         -p sjFK4jJmFgl1M \
-        -u ${USER_UID:-1000} -g ${USER_GID:-1000} -G sudo dev && \
-    echo -e "unbind C-b\nset -g prefix ${TMUX_MODIFIER}\nbind ${TMUX_MODIFIER} send-prefix" > ${DEV_HOME}/.tmux.conf && \
-    chown -R dev:dev ${DEV_HOME}
+        -g dev -G sudo dev && \
+    echo -e "unbind C-b\nset -g prefix ${TMUX_MODIFIER}\nbind ${TMUX_MODIFIER} send-prefix" > ${DEV_HOME}/.tmux.conf
 
 COPY entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/bin/bash", "/docker-entrypoint.sh"]
