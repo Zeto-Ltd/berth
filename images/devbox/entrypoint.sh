@@ -9,6 +9,7 @@ then
 fi
 # SSH server for easy integration with Intellij IDEA
 /etc/init.d/ssh start
+mkdir -p /var/log/containers
 
 # Ensure the user ID + group ID match the host UID + GID, otherwise file
 # permission errors will occur
@@ -31,8 +32,9 @@ if [ "${EXPECTED_UID}" != "${ACTUAL_UID}" ] || \
    [ "${EXPECTED_UID}" != "${HOME_UID}" ] || \
    [ "${EXPECTED_GID}" != "${HOME_GID}" ]
 then
-    echo "Converting permissions for home directory, please wait..."
+    echo "Converting permissions for relevant directories, please wait..."
     chown -R dev:dev /home/dev
+    chown -R dev:dev /var/log/containers
 fi
 
 exec su -c "$@" dev
