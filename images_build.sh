@@ -44,6 +44,9 @@ docker push zetoltd/nginx-elb:1.0.0
 docker build -t zetoltd/pgbouncer-ecs:1.0.0 ./images/pgbouncer-ecs/
 docker push zetoltd/pgbouncer-ecs:1.0.0
 
+docker build -t zetoltd/frp:1.0.0 ./images/frp/
+docker push zetoltd/frp:1.0.0
+
 docker build -t zetoltd/chronos:1.0.0 ./images/chronos/
 docker push zetoltd/chronos:1.0.0
 
