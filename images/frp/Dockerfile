@@ -11,7 +11,9 @@ RUN git clone https://github.com/fatedier/frp.git src/github.com/fatedier/frp &&
     cp bin/frps bin/frpc /usr/bin/ && \
     mkdir -p /etc/frp && \
     cp conf/frps.ini /etc/frp/frps.ini && \
-    cp conf/frpc.ini /etc/frp/frpc.ini
+    cp conf/frpc.ini /etc/frp/frpc.ini && \
+    cd /go && \
+    rm -rf src/github.com/fatedier/frp
 
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
