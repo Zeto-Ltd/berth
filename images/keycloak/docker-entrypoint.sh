@@ -25,6 +25,8 @@ if [ -n "${KEYCLOAK_S3_CONFIG}" ]; then
   echo "==> Using S3 configuration '${KEYCLOAK_S3_CONFIG}'"
 fi
 
+bash /custom/bin/init.sh
+
 # bind all defaults to address Docker container uses
 exec /keycloak/bin/standalone.sh \
     -Djava.net.preferIPv4Stack=true \
