@@ -50,8 +50,8 @@ docker push zetoltd/frp:1.0.0
 docker build -t zetoltd/chronos:1.0.0 ./images/chronos/
 docker push zetoltd/chronos:1.0.0
 
-docker build -t zetoltd/keycloak:1.0.0 ./images/keycloak/
-docker push zetoltd/keycloak:1.0.0
+docker build -t zetoltd/keycloak:1.0.1 ./images/keycloak/
+docker push zetoltd/keycloak:1.0.1
 
 docker build -t zetoltd/devbox:1.0.1 ./images/devbox/
 docker push zetoltd/devbox:1.0.1
