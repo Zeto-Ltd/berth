@@ -2,12 +2,10 @@ FROM node:8.12.0-alpine
 
 USER root
 
-RUN apk add --update --no-cache bash xvfb py-pip && \
+RUN apk add --update --no-cache git bash chromium py-pip && \
     pip install --no-cache-dir awscli==1.11.184 && \
-    npm install -g npm@v5.6.0
+    npm install -g npm@v6.4.1
+COPY chrome-headless.sh /usr/bin/chrome-headless
+COPY env.sh /etc/profile.d/env.sh
 
-# ensure that the CircleCI build agent doesn't override the entrypoint
-LABEL com.circleci.preserve-entrypoint=true
-COPY entrypoint.sh /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/bin/sh"]
+CMD ["/bin/sh", "-l"]
