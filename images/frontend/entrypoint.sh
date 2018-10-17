@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export PATH="/root/.nvm/versions/node/v4.4.4/bin:$PATH"
+export PATH="/root/.nvm/versions/node/v8.12.0/bin:$PATH"
 
 # so we can run tests:
 # browsers (even headless ones) needs a display to run hence the virtual display
