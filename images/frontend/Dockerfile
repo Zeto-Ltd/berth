@@ -1,21 +1,11 @@
-FROM node:4.4.4
-
-# using node v4.4.4 and npm v2.15.1 with AWS CLI
+FROM node:8.12.0-alpine
 
 USER root
 
-# Install dependencies + AWS CLI for distribution
-RUN apt-get update && \
-    apt-get install -yq \
-    git libssl-dev libpython-dev build-essential apt-transport-https ca-certificates \
-    software-properties-common python-setuptools python-pip && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists /var/cache/apt && \
-    pip install awscli==1.11.184 && npm install -g npm@v2.15.1
+RUN apk add --update --no-cache git bash chromium py-pip && \
+    pip install --no-cache-dir awscli==1.11.184 && \
+    npm install -g npm@v6.4.1
+COPY chrome-headless.sh /usr/bin/chrome-headless
+COPY env.sh /etc/profile.d/env.sh
 
-
-# ensure that the CircleCI build agent doesn't override the entrypoint
-LABEL com.circleci.preserve-entrypoint=true
-COPY entrypoint.sh /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/bin/sh"]
+CMD ["/bin/sh", "-l"]
