@@ -26,6 +26,10 @@ docker push zetoltd/circleci-cordova-android:1.0.0
 docker build -t zetoltd/circleci-website:1.0.0 ./images/website/
 docker push zetoltd/circleci-website:1.0.0
 
+docker build -t zetoltd/circleci-website:2.0.0 ./images/website_py3/
+docker push zetoltd/circleci-website:2.0.0
+
+
 docker build -t zetoltd/circleci-java:1.0.1 ./images/java/
 docker push zetoltd/circleci-java:1.0.1
 
