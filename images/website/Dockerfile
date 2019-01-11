@@ -1,4 +1,4 @@
-FROM circleci/python:2.7
+FROM circleci/python:3.6
 
 # combining Python + Node with AWS and Heroku CLIs
 
@@ -8,7 +8,7 @@ USER root
 RUN apt-get update && \
     apt-get install -yq \
     git libpython-dev build-essential apt-transport-https ca-certificates \
-    gnupg2 software-properties-common python-setuptools python-pip \
+    gnupg2 software-properties-common python-setuptools python3-pip \
     libxss1 xvfb libxtst-dev libgtkextra-dev libgconf2-dev libnss3 libasound2 && \
     wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh && \
     apt-get clean && \
