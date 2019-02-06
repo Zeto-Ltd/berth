@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export ANDROID_HOME=/root/android-sdk-linux
-export PATH="/root/gradle/bin:/root/android-sdk-linux/tools/bin:/root/android-sdk-linux/tools:/root/android-sdk-linux/platform-tools:$PATH"
+export ANDROID_HOME=$HOME/android-sdk-linux
+export PATH="$HOME/gradle/bin:$HOME/android-sdk-linux/tools/bin:$HOME/android-sdk-linux/tools:$HOME/android-sdk-linux/platform-tools:$PATH"
 
 exec "$@"
