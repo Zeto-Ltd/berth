@@ -99,6 +99,12 @@ RUN addgroup dev && \
         -g dev -G sudo dev && \
     echo -e "unbind C-b\nset -g prefix ${TMUX_MODIFIER}\nbind ${TMUX_MODIFIER} send-prefix" > ${DEV_HOME}/.tmux.conf
 
+RUN chown -R dev:dev /home/dev && \
+    mkdir -p /var/log/containers && \
+    chown -R dev:dev /var/log/containers
+
 COPY entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/bin/bash", "/docker-entrypoint.sh"]
+EXPOSE 1234
+EXPOSE 8000-9999
 CMD ["bash"]
